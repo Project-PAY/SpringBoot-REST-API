@@ -37,7 +37,7 @@ public class AccountController {
     public void login(
             @RequestParam @NotNull String identify,
             @RequestParam @NotNull String password) {
-
+        // JWT
         System.out.println(accountService.login(identify, password));
     }
 
