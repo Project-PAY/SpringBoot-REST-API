@@ -9,10 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,11 +32,11 @@ public class AuthService implements AuthRepository {
 
 
     public boolean isUser(@Valid String token) {
-        Map map = doGet(CLAIM);
-        return userRepository.getOne((Long) map.get("index")) != null;
+        Map map = doGet(CLAIM, token);
+        return userRepository.getOne(Long.parseLong(String.valueOf(map.get("index")))) != null;
     }
 
-    
+
     public String createUser(@Valid Long index,
                              @Valid String identify,
                              @Valid String name) {
@@ -54,7 +51,6 @@ public class AuthService implements AuthRepository {
 
 
     public void destroyUser() {
-        // Destory User JWT
         doDestroy(CLAIM);
     }
 
@@ -75,19 +71,16 @@ public class AuthService implements AuthRepository {
 
     @Override
     public void doDestroy(String claim) {
-        // Destory JWT
     }
 
 
     @Override
-    public Map<String, Object> doGet(String claim) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
+    public Map<String, Object> doGet(String claim, String token) {
         Jws<Claims> claims;
 
         claims = Jwts.parser()
                 .setSigningKey(generateKey())
-                .parseClaimsJws(request.getHeader(HEADER));
+                .parseClaimsJws(token);
 
         Map<String, Object> map = (Map<String, Object>) claims.getBody().get(claim);
 

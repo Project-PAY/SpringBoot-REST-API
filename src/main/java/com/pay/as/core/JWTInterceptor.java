@@ -14,13 +14,13 @@ public class JWTInterceptor implements HandlerInterceptor {
     private static final String HEADER = "PAY-AUTH-TOKEN";
 
     @Autowired
-    AuthService jwtService;
+    AuthService authService;
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         final String token = request.getHeader(HEADER);
-        return jwtService.isUser(token);
+        return authService.isUser(token);
     }
 
 }

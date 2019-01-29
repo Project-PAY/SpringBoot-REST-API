@@ -11,7 +11,7 @@ public interface AuthRepository {
 
     void doDestroy(String claim);
 
-    Map<String, Object> doGet(String claim);
+    Map<String, Object> doGet(String claim, String token);
 
     byte[] generateKey();
 
