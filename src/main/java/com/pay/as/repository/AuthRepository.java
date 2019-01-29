@@ -1,8 +1,8 @@
-package com.pay.as.support;
+package com.pay.as.repository;
 
 import java.util.Map;
 
-public interface JWT {
+public interface AuthRepository {
 
     String HEADER = "PAY-AUTH-TOKEN";
     String SALT = "paySecret";

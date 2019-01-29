@@ -1,6 +1,6 @@
 package com.pay.as.service;
 
-import com.pay.as.support.JWT;
+import com.pay.as.repository.AuthRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class JWTService implements JWT {
+public class AuthService implements AuthRepository {
 
     private final String CLAIM = "USER";
 
-    public boolean isUser() {
+    public boolean isUser(@Valid String token) {
         Map map = doGet(CLAIM);
         return map != null;
     }
@@ -50,7 +50,7 @@ public class JWTService implements JWT {
         String token = Jwts.builder()
                 .setHeaderParam("type", "JWT")
                 .setHeaderParam("at", System.currentTimeMillis())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600))
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .setSubject(claim)
                 .claim(claim, map)
                 .signWith(SignatureAlgorithm.HS256, generateKey())

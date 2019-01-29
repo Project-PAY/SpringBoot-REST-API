@@ -10,7 +10,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(createInterceptor()).addPathPatterns("/accounts");
+        registry
+                .addInterceptor(createInterceptor())
+                .addPathPatterns("/swagger-ui.html");
     }
 
 
