@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-public class AccountService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;

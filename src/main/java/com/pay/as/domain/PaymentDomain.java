@@ -39,6 +39,6 @@ public class PaymentDomain {
     private Long price;
 
     @Column(length = 16)
-    private String methodPayment;
+    private String method;
 
 }

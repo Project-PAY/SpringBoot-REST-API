@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -17,6 +18,11 @@ import java.util.Map;
 
 @Service
 public class AuthService implements AuthRepository {
+
+    @Value("${pay.jwt.header}")
+    private String HEADER;
+    @Value("${pay.jwt.salt}")
+    private String SALT;
 
     @Autowired
     private UserRepository userRepository;
@@ -32,8 +38,7 @@ public class AuthService implements AuthRepository {
 
 
     public boolean isUser(@Valid String token) {
-        Map map = doGet(CLAIM, token);
-        return userRepository.getOne(Long.parseLong(String.valueOf(map.get("index")))) != null;
+        return userRepository.getOne(getUser(token).getIndex()) != null;
     }
 
 
@@ -54,6 +59,20 @@ public class AuthService implements AuthRepository {
         doDestroy(CLAIM);
     }
 
+
+    public UserDomain getUser(@Valid String token) {
+        Map map = doGet(CLAIM, token);
+        return UserDomain.builder()
+                .identify(String.valueOf(map.get("identify")))
+                .name(String.valueOf(map.get("name")))
+                .index(Long.parseLong(String.valueOf(map.get("index"))))
+                .build();
+    }
+
+    public Long getUserIndex(@Valid String token) {
+        Map map = doGet(CLAIM, token);
+        return Long.parseLong(String.valueOf(map.get("index")));
+    }
 
     @Override
     public String doCreate(String claim, Map map) {

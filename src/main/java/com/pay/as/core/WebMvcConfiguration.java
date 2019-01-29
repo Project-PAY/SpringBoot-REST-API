@@ -13,7 +13,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry
                 .addInterceptor(createInterceptor())
-                .addPathPatterns("/swagger-ui.html");
+                .excludePathPatterns(new String[]{
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/auth",
+                        "/error/**"
+                });
     }
 
 

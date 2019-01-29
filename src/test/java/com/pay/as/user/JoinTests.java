@@ -2,8 +2,12 @@ package com.pay.as.user;
 
 import com.pay.as.domain.PaymentDomain;
 import com.pay.as.domain.UserDomain;
+import com.pay.as.repository.AuthRepository;
 import com.pay.as.repository.PaymentRepository;
 import com.pay.as.repository.UserRepository;
+import com.pay.as.service.AuthService;
+import com.pay.as.service.PaymentService;
+import com.pay.as.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +23,17 @@ public class JoinTests {
 
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    AuthRepository authRepository;
     @Autowired
     PaymentRepository paymentRepository;
+
+    @Autowired
+    UserService userService;
+    @Autowired
+    AuthService authService;
+    @Autowired
+    PaymentService paymentService;
 
     @Test
     @Transactional

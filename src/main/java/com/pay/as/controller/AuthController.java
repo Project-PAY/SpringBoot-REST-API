@@ -1,6 +1,5 @@
 package com.pay.as.controller;
 
-import com.pay.as.service.AccountService;
 import com.pay.as.service.AuthService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import javax.validation.constraints.Size;
 @RestController
 public class AuthController {
 
-    @Autowired
-    AccountService accountService;
     @Autowired
     AuthService authService;
 

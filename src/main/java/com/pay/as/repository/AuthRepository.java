@@ -4,9 +4,6 @@ import java.util.Map;
 
 public interface AuthRepository {
 
-    String HEADER = "PAY-AUTH-TOKEN";
-    String SALT = "paySecret";
-
     String doCreate(String claim, Map map);
 
     void doDestroy(String claim);
