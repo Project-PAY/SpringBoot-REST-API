@@ -19,7 +19,6 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("com.pay.as.controller"))
                 .paths(PathSelectors.any())
                 .build();
-
     }
 
 }

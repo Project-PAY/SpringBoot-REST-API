@@ -14,11 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class JWTInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(JWTInterceptor.class);
-    private static final String HEADER = "PAY-Auth-Token";
+    private static final String HEADER = "PAY-AUTH-TOKEN";
 
     @Autowired
     JWTService jwtService;
-
 
 
     @Override
@@ -28,7 +27,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         final String token = request.getHeader(HEADER);
 
 
-        return false;
+        return true;
     }
 
 }

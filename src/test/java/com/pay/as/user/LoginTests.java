@@ -21,7 +21,7 @@ public class LoginTests {
 
     @Test
     public void 로그인() {
-        UserDomain userDomain = userRepository.findByIdentifyAndPassword("test", "testPassword");
+        UserDomain userDomain = userRepository.findByIdentifyAndPasswordAndAvailable("test", "testPassword", "able");
 
         System.out.println(userDomain.toString());
     }

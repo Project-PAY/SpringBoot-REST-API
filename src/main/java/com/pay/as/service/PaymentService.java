@@ -16,7 +16,6 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
 
 
-
     public void addIncome(UserDomain userDomain,
                           String content,
                           Long price) {

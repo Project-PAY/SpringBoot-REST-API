@@ -55,7 +55,7 @@ public class AccountService {
 
     public UserDomain login(String identify,
                             String password) {
-        return userRepository.findByIdentifyAndPassword(identify, password);
+        return userRepository.findByIdentifyAndPasswordAndAvailable(identify, password, "able");
     }
 
 }

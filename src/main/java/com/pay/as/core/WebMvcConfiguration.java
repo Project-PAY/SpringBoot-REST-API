@@ -10,7 +10,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(createInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(createInterceptor()).addPathPatterns("/accounts");
     }
 
 
