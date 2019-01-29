@@ -1,10 +1,13 @@
 package com.pay.as.service;
 
+import com.pay.as.domain.UserDomain;
 import com.pay.as.repository.AuthRepository;
+import com.pay.as.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -18,14 +21,25 @@ import java.util.Map;
 @Service
 public class AuthService implements AuthRepository {
 
+    @Autowired
+    private UserRepository userRepository;
+
     private final String CLAIM = "USER";
 
-    public boolean isUser(@Valid String token) {
-        Map map = doGet(CLAIM);
-        return map != null;
+
+    public String auth(@Valid String identify,
+                       @Valid String password) {
+        UserDomain userDomain = userRepository.findByIdentifyAndPasswordAndAvailable(identify, password, "able");
+        return createUser(userDomain.getIndex(), userDomain.getIdentify(), userDomain.getName());
     }
 
 
+    public boolean isUser(@Valid String token) {
+        Map map = doGet(CLAIM);
+        return userRepository.getOne((Long) map.get("index")) != null;
+    }
+
+    
     public String createUser(@Valid Long index,
                              @Valid String identify,
                              @Valid String name) {

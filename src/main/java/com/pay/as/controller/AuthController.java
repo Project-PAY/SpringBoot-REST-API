@@ -1,6 +1,5 @@
 package com.pay.as.controller;
 
-import com.pay.as.domain.UserDomain;
 import com.pay.as.service.AccountService;
 import com.pay.as.service.AuthService;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +17,7 @@ public class AuthController {
     @Autowired
     AccountService accountService;
     @Autowired
-    AuthService jwtService;
+    AuthService authService;
 
 
     @PostMapping("/auth")
@@ -26,8 +25,7 @@ public class AuthController {
     public String login(
             @RequestParam @NotNull @Size(max = 32) String identify,
             @RequestParam @NotNull @Size(max = 64) String password) {
-        UserDomain userDomain = accountService.login(identify, password);
-        return jwtService.createUser(userDomain.getIndex(), userDomain.getIdentify(), userDomain.getName());
+        return authService.auth(identify, password);
     }
 
 }

@@ -18,7 +18,6 @@ public class AccountService {
     private PaymentRepository paymentRepository;
 
 
-
     @Transactional
     public void join(String identify,
                      String password,
@@ -49,13 +48,6 @@ public class AccountService {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    }
-
-
-
-    public UserDomain login(String identify,
-                            String password) {
-        return userRepository.findByIdentifyAndPasswordAndAvailable(identify, password, "able");
     }
 
 }
