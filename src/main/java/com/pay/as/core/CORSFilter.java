@@ -1,4 +1,4 @@
-package com.pay.as.config;
+package com.pay.as.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
